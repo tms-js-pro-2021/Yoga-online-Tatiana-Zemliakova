@@ -8,14 +8,28 @@ module.exports = {
   entry: {
     main: path.resolve(__dirname, './src/index.js'),
 },
-  devServer: {
-    contentBase: path.join(__dirname, "/public"),
+
+devServer: {
+    static: {
+      directory: path.join(__dirname, '/public'),
+      watch: true,
+    },
     port: 3000,
-    watchContentBase: true,
     historyApiFallback: true,
   },
+
   module: {
     rules: [
+      // шрифты и SVG
+      {
+        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        type: 'asset/inline',
+    },
+    // CSS, PostCSS, Sassnpm install eslint --save-dev
+    {
+      test: /\.(scss|css)$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+  },
       {
         test: /\.(js|jsx)$/,
         exclude: /nodeModules/,
