@@ -1,15 +1,16 @@
-const path = require("path");
+/* eslint-disable no-undef */
+const path = require('path');
 
 module.exports = {
   output: {
-    path: path.join(__dirname, "/public"),
-    filename: "bundle.js",
+    path: path.join(__dirname, '/public'),
+    filename: 'bundle.js',
   },
   entry: {
     main: path.resolve(__dirname, './src/index.js'),
-},
+  },
 
-devServer: {
+  devServer: {
     static: {
       directory: path.join(__dirname, '/public'),
       watch: true,
@@ -17,24 +18,26 @@ devServer: {
     port: 3000,
     historyApiFallback: true,
   },
-
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
   module: {
     rules: [
       // шрифты и SVG
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: 'asset/inline',
-    },
-    // CSS, PostCSS, Sassnpm install eslint --save-dev
-    {
-      test: /\.(scss|css)$/,
-      use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
-  },
+      },
+      // CSS, PostCSS, Sassnpm install eslint --save-dev
+      {
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
       {
         test: /\.(js|jsx)$/,
-        exclude: /nodeModules/,
+        exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
     ],
