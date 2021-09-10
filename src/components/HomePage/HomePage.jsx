@@ -6,6 +6,7 @@ export default function HomePage() {
     <>
       <div>HomePage</div>
       <Link to="/login">login</Link>
+      <div>Контакты</div>
     </>
   );
 }
