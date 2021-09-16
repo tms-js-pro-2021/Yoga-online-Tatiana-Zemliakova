@@ -12,7 +12,7 @@ export default function LoginPage() {
       password: '',
     },
     onSubmit: (values) => {
-      fetch('https://uoxfu.sse.codesandbox.io/login', {
+      fetch('https://tms-js-pro-back-end.herokuapp.com/api/users/signup', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
