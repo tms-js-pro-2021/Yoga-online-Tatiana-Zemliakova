@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from '../LoginPage';
 import AdminPage from '../AdminPage';
 import HomePage from '../HomePage';
@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/login">
           <LoginPage />
         </Route>
-        <Route path="">
+        <Route path="/admin">
           <AdminPage />
         </Route>
         <Route>
