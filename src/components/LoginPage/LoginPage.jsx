@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { TextField, Button, Box } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import Navibar from '../Navibar';
 
 export default function LoginPage() {
   const { push } = useHistory();
@@ -34,45 +36,48 @@ export default function LoginPage() {
   });
 
   return (
-    <Box
-      m={2}
-      style={{
-        height: '100vh',
-        width: '100vw',
-        display: 'grid',
-        placeItems: 'center',
-      }}
-    >
-      <form onSubmit={formik.handleSubmit}>
-        <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
-          <TextField
-            required
-            label="Login"
-            name="login"
-            value={formik.values.login}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.login && !!formik.errors.login}
-            helperText={formik.touched.login && formik.errors.login}
-          />
-          <TextField
-            required
-            label="Password"
-            type="password"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.password && !!formik.errors.password}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <Button variant="contained" type="submit" sx={{ m: 1 }}>
-            login
-          </Button>
-        </div>
-      </form>
-    </Box>
+    <div>
+      <Navibar />
+      <Box
+        m={2}
+        style={{
+          height: '100vh',
+          width: '100vw',
+          display: 'grid',
+          placeItems: 'center',
+        }}
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
+            <TextField
+              required
+              label="Login"
+              name="login"
+              value={formik.values.login}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              sx={{ m: 1 }}
+              error={formik.touched.login && !!formik.errors.login}
+              helperText={formik.touched.login && formik.errors.login}
+            />
+            <TextField
+              required
+              label="Password"
+              type="password"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              sx={{ m: 1 }}
+              error={formik.touched.password && !!formik.errors.password}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <Button variant="contained" type="submit" sx={{ m: 1 }}>
+              login
+            </Button>
+          </div>
+        </form>
+      </Box>
+    </div>
   );
 }

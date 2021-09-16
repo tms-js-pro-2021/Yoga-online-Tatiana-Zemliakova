@@ -1,12 +1,13 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import Navibar from '../Navibar';
 
 export default function HomePage() {
   return (
     <>
-      <div>HomePage</div>
-      <Link to="/login">login</Link>
-      <div>Контакты</div>
+      <Navibar />
+      <div>Home Page</div>
     </>
   );
 }

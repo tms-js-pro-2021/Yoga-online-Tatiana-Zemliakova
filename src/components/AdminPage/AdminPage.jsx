@@ -1,5 +1,12 @@
+/* eslint-disable import/no-unresolved */
 import React from 'react';
+import Navibar from '../Navibar';
 
 export default function AdminPage() {
-  return <div>AdminPage</div>;
+  return (
+    <div>
+      <Navibar />
+      <div>Admin page</div>
+    </div>
+  );
 }

@@ -5,6 +5,7 @@ import LoginPage from '../LoginPage';
 import AdminPage from '../AdminPage';
 import HomePage from '../HomePage';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   return (
