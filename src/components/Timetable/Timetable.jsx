@@ -2,11 +2,11 @@
 import React from 'react';
 import Navibar from '../Navibar/Navibar';
 
-export default function HomePage() {
+export default function Timetable() {
   return (
     <>
       <Navibar />
-      <div>HomePage</div>
+      <div>Timetable</div>
     </>
   );
 }

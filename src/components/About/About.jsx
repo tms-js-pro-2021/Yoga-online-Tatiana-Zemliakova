@@ -2,11 +2,11 @@
 import React from 'react';
 import Navibar from '../Navibar/Navibar';
 
-export default function HomePage() {
+export default function About() {
   return (
     <>
       <Navibar />
-      <div>HomePage</div>
+      <div>About</div>
     </>
   );
 }

@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { TextField, Button, Box } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import Navibar from '../Navibar';
+import Navibar from '../Navibar/Navibar';
 
 export default function LoginPage() {
   const { push } = useHistory();
