@@ -9,7 +9,7 @@ export default function Slider() {
         <img
           className="d-block w-100"
           height="700px"
-          src="./images/rozoviegori.png"
+          src="images/rozoviegori.png"
           alt="gory"
         />
         <Carousel.Caption>
@@ -25,7 +25,7 @@ export default function Slider() {
         <img
           className="d-block w-100"
           height="700px"
-          src="images.rozoviegori.png"
+          src="images/rozoviegori.png"
           alt="gory"
         />
         <Carousel.Caption>
@@ -41,7 +41,7 @@ export default function Slider() {
         <img
           className="d-block w-100"
           height="700px"
-          src="images.rozoviegori.png"
+          src="images/rozoviegori.png"
           alt="gory"
         />
         <Carousel.Caption>

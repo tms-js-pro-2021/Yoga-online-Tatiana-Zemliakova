@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
-import Navibar from './Navibar';
+import Navibar from './Navibar.jsx';
 
 export default Navibar;

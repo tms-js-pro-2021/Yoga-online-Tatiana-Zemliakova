@@ -5,10 +5,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Styles = styled.div`
+  a,
   .navbar-brand,
   .nav-link {
     color: #000000;
-    outline: none;
+    text-decoration: none;
+    &:hover {
+      color: red;
+    }
   }
 `;
 
@@ -21,7 +25,7 @@ export default function Navibar() {
             <Navbar.Brand>
               <Link to="/">
                 <img
-                  src="src/images/logo.svg"
+                  src="/images/logo.svg"
                   width="130"
                   height="57"
                   className="d-inline-block align-top"
