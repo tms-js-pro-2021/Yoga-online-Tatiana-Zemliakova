@@ -2,11 +2,11 @@
 import React from 'react';
 import Navibar from '../Navibar/Navibar';
 
-export default function AdminPage() {
+export default function Contacts() {
   return (
     <>
       <Navibar />
-      <div>AdminPage</div>
+      <div>Contacts</div>
     </>
   );
 }

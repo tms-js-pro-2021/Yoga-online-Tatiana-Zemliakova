@@ -2,11 +2,11 @@
 import React from 'react';
 import Navibar from '../Navibar/Navibar';
 
-export default function AdminPage() {
+export default function Timetable() {
   return (
     <>
       <Navibar />
-      <div>AdminPage</div>
+      <div>Timetable</div>
     </>
   );
 }

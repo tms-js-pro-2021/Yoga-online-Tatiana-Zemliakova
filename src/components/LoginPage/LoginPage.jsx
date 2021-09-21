@@ -4,17 +4,17 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { TextField, Button, Box } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import Navibar from '../Navibar';
+import Navibar from '../Navibar/Navibar';
 
 export default function LoginPage() {
   const { push } = useHistory();
   const formik = useFormik({
     initialValues: {
-      login: '',
+      email: '',
       password: '',
     },
     onSubmit: (values) => {
-      fetch('https://uoxfu.sse.codesandbox.io/login', {
+      fetch('https://tms-js-pro-back-end.herokuapp.com/api/users/signin', {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
@@ -22,21 +22,26 @@ export default function LoginPage() {
           'Content-Type': 'application/json',
         },
       }).then((res) => {
-        if (res.status === 200) push('/');
-        else res.text().then((errorString) => alert(errorString));
+        if (res.status === 200) {
+          res.json().then((data) => {
+            console.log(data);
+            push('/admin');
+          });
+          //сохранить токен, как todolist
+        } else res.text().then((errorString) => alert(errorString));
       });
       formik.resetForm();
     },
     validateOnChange: false,
     validateOnBlur: true,
     validationSchema: object({
-      login: string().email('некорретный e-mail'),
+      email: string().email('некорретный e-mail'),
       password: string().required(),
     }),
   });
 
   return (
-    <div>
+    <>
       <Navibar />
       <Box
         m={2}
@@ -51,14 +56,14 @@ export default function LoginPage() {
           <div style={{ width: 200, display: 'flex', flexDirection: 'column' }}>
             <TextField
               required
-              label="Login"
-              name="login"
-              value={formik.values.login}
+              label="Email"
+              name="email"
+              value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               sx={{ m: 1 }}
-              error={formik.touched.login && !!formik.errors.login}
-              helperText={formik.touched.login && formik.errors.login}
+              error={formik.touched.email && !!formik.errors.email}
+              helperText={formik.touched.email && formik.errors.email}
             />
             <TextField
               required
@@ -78,6 +83,6 @@ export default function LoginPage() {
           </div>
         </form>
       </Box>
-    </div>
+    </>
   );
 }
