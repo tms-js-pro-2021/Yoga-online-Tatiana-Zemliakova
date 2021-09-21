@@ -8,7 +8,7 @@ import HomePage from '../components/HomePage';
 import About from '../components/About';
 import Teachers from '../components/Teachers';
 import Timetable from '../components/Timetable';
-import Contacts from '../components/Contacts/Contacts';
+import Contacts from '../components/Contacts';
 
 export default function App() {
   return (
