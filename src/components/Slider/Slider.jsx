@@ -8,8 +8,8 @@ export default function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="700px"
-          src="images/rozoviegori.png"
+          height="600px"
+          src="images/gory.jpg"
           alt="gory"
         />
         <Carousel.Caption>
@@ -18,14 +18,14 @@ export default function Slider() {
             Animal Gymnastics Yoga – современная методика развития телесного
             функционала
           </p>
-          <Button>Подробнее</Button>
+          <Button variant="outline-light">Подробнее</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="700px"
-          src="images/rozoviegori.png"
+          height="600px"
+          src="images/zima.jpg"
           alt="gory"
         />
         <Carousel.Caption>
@@ -34,14 +34,14 @@ export default function Slider() {
             Animal Gymnastics Yoga – современная методика развития телесного
             функционала
           </p>
-          <Button>Подробнее</Button>
+          <Button variant="outline-light">Подробнее</Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="700px"
-          src="images/rozoviegori.png"
+          height="600px"
+          src="images/gory2.jpg"
           alt="gory"
         />
         <Carousel.Caption>
@@ -50,7 +50,7 @@ export default function Slider() {
             Animal Gymnastics Yoga – современная методика развития телесного
             функционала
           </p>
-          <Button>Подробнее</Button>
+          <Button variant="outline-light">Подробнее</Button>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
