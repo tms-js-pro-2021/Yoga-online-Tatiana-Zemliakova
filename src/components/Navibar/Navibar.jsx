@@ -29,14 +29,14 @@ export default function Navibar() {
                   width="130"
                   height="57"
                   className="d-inline-block align-top"
-                  alt="React Bootstrap logo"
+                  alt=""
                 ></img>
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Container>
-                <Nav className="me-auto">
+                <Nav className="me-auto" style={{ justifyContent: 'center' }}>
                   <Nav.Link>
                     <Link to="/about">О нас</Link>
                   </Nav.Link>
