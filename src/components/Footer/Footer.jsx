@@ -8,24 +8,7 @@ export default function Footer() {
       <Container
         style={{
           paddingTop: '2rem',
-        }}
-      >
-        <Link to="/">
-          <img
-            src="/images/logo.svg"
-            width="130"
-            height="57"
-            mt="38px"
-            mb="12px"
-            className="d-inline-block align-top"
-            alt=""
-          ></img>
-        </Link>
-      </Container>
-      <Container
-        style={{
-          paddingTop: '1rem',
-          paddingBottom: '7rem',
+          paddingBottom: '5rem',
           paddingLeft: '0',
           color: '#E5E5E5',
         }}
@@ -36,7 +19,18 @@ export default function Footer() {
             justifyContent: 'space-between',
           }}
         >
-          <Col sm={6}>
+          <Col
+            sm={4}
+            style={{
+              textAlign: 'center',
+              marginBottom: '1rem',
+            }}
+          >
+            <Link to="/">
+              <img src="/images/logo.svg" width="130" height="57" alt=""></img>
+            </Link>
+          </Col>
+          <Col sm={4}>
             <p
               style={{
                 color: '#E5E5E5',
@@ -48,7 +42,7 @@ export default function Footer() {
               Все права защищены. ОАО «КЛАБ ЙОГА»
             </p>
           </Col>
-          <Col sm={6}>
+          <Col sm={4}>
             <p
               style={{
                 color: '#E5E5E5',

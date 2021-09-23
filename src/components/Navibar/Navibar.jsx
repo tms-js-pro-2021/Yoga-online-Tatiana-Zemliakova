@@ -20,7 +20,7 @@ export default function Navibar() {
   return (
     <div>
       <Styles>
-        <Navbar collapseOnSelect expand="sm" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="md" bg="light" variant="light">
           <Container>
             <Navbar.Brand>
               <Link to="/">
