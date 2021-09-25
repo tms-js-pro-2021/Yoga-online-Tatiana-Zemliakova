@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React from 'react';
-import { Carousel, Button } from 'react-bootstrap';
+import { Carousel, Button, Card } from 'react-bootstrap';
 
 export default function Slider() {
   return (
@@ -13,12 +13,19 @@ export default function Slider() {
           alt="gory"
         />
         <Carousel.Caption>
-          <h2>Хатха йога с элементами Animal flow</h2>
+          <h2>Хатха йога</h2>
           <p>
-            Animal Gymnastics Yoga – современная методика развития телесного
-            функционала
+            Хатха-Йога — это учение о гармонии, основной инструмент
+            практикующего хатха-йогу – это тело как источник развития.
           </p>
-          <Button variant="outline-light">Подробнее</Button>
+          <Button variant="outline-light">
+            <Card.Link
+              href="/about"
+              style={{ color: '#FFFFFF', textDecoration: 'none' }}
+            >
+              Подробнее
+            </Card.Link>
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -29,12 +36,19 @@ export default function Slider() {
           alt="gory"
         />
         <Carousel.Caption>
-          <h2>Хатха йога с элементами Animal flow</h2>
+          <h2>Аштанга йога</h2>
           <p>
-            Animal Gymnastics Yoga – современная методика развития телесного
-            функционала
+            Аштанга йога направлена на укрепление тела, развитие гибкости,
+            физической и ментальной устойчивости.
           </p>
-          <Button variant="outline-light">Подробнее</Button>
+          <Button variant="outline-light">
+            <Card.Link
+              href="/about"
+              style={{ color: '#FFFFFF', textDecoration: 'none' }}
+            >
+              Подробнее
+            </Card.Link>
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -47,10 +61,17 @@ export default function Slider() {
         <Carousel.Caption>
           <h2>Хатха йога с элементами Animal flow</h2>
           <p>
-            Animal Gymnastics Yoga – современная методика развития телесного
-            функционала
+            Animal Gymnastics Yoga – включает в себя традиционные боевые
+            искусства и элементы, имитирующие движения животных.
           </p>
-          <Button variant="outline-light">Подробнее</Button>
+          <Button variant="outline-light">
+            <Card.Link
+              href="/about"
+              style={{ color: '#FFFFFF', textDecoration: 'none' }}
+            >
+              Подробнее
+            </Card.Link>
+          </Button>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>

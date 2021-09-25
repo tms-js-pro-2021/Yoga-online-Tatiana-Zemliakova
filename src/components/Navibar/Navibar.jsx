@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
@@ -11,7 +12,8 @@ const Styles = styled.div`
     color: #000000;
     text-decoration: none;
     &:hover {
-      color: red;
+      color: brown;
+      text-decoration: underline;
     }
   }
 `;
