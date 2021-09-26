@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/no-unresolved */
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
@@ -11,7 +12,8 @@ const Styles = styled.div`
     color: #000000;
     text-decoration: none;
     &:hover {
-      color: red;
+      color: brown;
+      text-decoration: underline;
     }
   }
 `;
@@ -20,7 +22,7 @@ export default function Navibar() {
   return (
     <div>
       <Styles>
-        <Navbar collapseOnSelect expand="sm" bg="light" variant="light">
+        <Navbar collapseOnSelect expand="md" bg="light" variant="light">
           <Container>
             <Navbar.Brand>
               <Link to="/">
@@ -29,14 +31,14 @@ export default function Navibar() {
                   width="130"
                   height="57"
                   className="d-inline-block align-top"
-                  alt="React Bootstrap logo"
+                  alt=""
                 ></img>
               </Link>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Container>
-                <Nav className="me-auto">
+                <Nav className="me-auto" style={{ justifyContent: 'center' }}>
                   <Nav.Link>
                     <Link to="/about">О нас</Link>
                   </Nav.Link>

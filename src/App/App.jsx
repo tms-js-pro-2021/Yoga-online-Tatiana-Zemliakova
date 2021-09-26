@@ -9,10 +9,13 @@ import About from '../components/About';
 import Teachers from '../components/Teachers';
 import Timetable from '../components/Timetable';
 import Contacts from '../components/Contacts';
+import Footer from '../components/Footer';
+import Navibar from '../components/Navibar';
 
 export default function App() {
   return (
     <Router>
+      <Navibar />
       <Switch>
         <Route exact path="/" component={HomePage}></Route>
         <Route path="/about" component={About}></Route>
@@ -25,6 +28,7 @@ export default function App() {
           404 not found <Link to="/login">login</Link>
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
