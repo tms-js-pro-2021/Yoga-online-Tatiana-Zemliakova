@@ -8,7 +8,7 @@ export default function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="600px"
+          height="448px"
           src="images/gory.jpg"
           alt="gory"
         />
@@ -31,7 +31,7 @@ export default function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="600px"
+          height="448px"
           src="images/zima.jpg"
           alt="gory"
         />
@@ -54,7 +54,7 @@ export default function Slider() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          height="600px"
+          height="448px"
           src="images/gory2.jpg"
           alt="gory"
         />

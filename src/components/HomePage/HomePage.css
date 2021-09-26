@@ -1,5 +1,9 @@
-.background-gray {
+.background-half-gray {
   background: linear-gradient(to bottom, white 50%, rgba(116, 138, 133, 0.8) 50%);
   }
 
-  
+  @media (max-width: 576px) {
+    .background-half-gray {
+      background: rgba(116, 138, 133, 0.8);
+      }
+    }

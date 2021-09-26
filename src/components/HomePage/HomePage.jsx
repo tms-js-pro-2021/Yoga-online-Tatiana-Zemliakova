@@ -35,9 +35,10 @@ export default function HomePage() {
       </Container>
       <Container
         fluid
-        className="background-gray"
+        className="background-half-gray"
         style={{
           paddingBottom: '3rem',
+          sm: 'background-gray',
         }}
       >
         <Container>
@@ -102,7 +103,7 @@ export default function HomePage() {
                 <Card.Img variant="top" src="/images/teacher3.png" />
                 <Card.Body>
                   <Card.Title>Дарья Табольская</Card.Title>
-                  <Card.Text>Виньяса Флоу Йога</Card.Text>
+                  <Card.Text>Виньяса Йога</Card.Text>
                   <Button variant="outline-light">
                     <Card.Link
                       href="/teachers"
@@ -140,7 +141,7 @@ export default function HomePage() {
                 paddingBottom: '5rem',
                 paddingLeft: '2rem',
                 paddingRight: '1rem',
-                height: '30rem',
+                height: '24rem',
                 background: 'rgba(229, 229, 229, 0.9)',
                 color: '#4D1919',
               }}
@@ -164,7 +165,7 @@ export default function HomePage() {
                 paddingBottom: '5rem',
                 paddingLeft: '2rem',
                 paddingRight: '1rem',
-                height: '30rem',
+                height: '24rem',
                 background: 'rgba(77, 25, 25, 0.9)',
                 color: '#FFFFFF',
               }}
