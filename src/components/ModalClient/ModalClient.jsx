@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
-import {
-  Form,
-  Modal,
-  Button,
-  FloatingLabel,
-  Toast,
-  Container,
-  ToastContainer,
-} from 'react-bootstrap';
+import { Form, Modal, Button, FloatingLabel, Container } from 'react-bootstrap';
+
+import ModalAnswer from '../ModalAnswer';
 
 export default function ModalClient(props) {
   const [showA, setShowA] = useState(false);
-  const toggleShowA = () => setShowA(!showA);
+  const handleShowA = () => setShowA(true);
+  const handleCloseA = () => setShowA(false);
+
   console.log(showA);
   return (
     <Container>
@@ -44,7 +40,7 @@ export default function ModalClient(props) {
             </Form.Group>
             <FloatingLabel>
               <Button
-                onClick={() => setShowA(true)}
+                onClick={handleShowA}
                 variant="outline-dark"
                 type="submit"
                 style={{
@@ -58,23 +54,7 @@ export default function ModalClient(props) {
           </Form>
         </Modal.Body>
       </Modal>
-      <ToastContainer className="p-3" position="middle-center">
-        <Toast show={showA} onClose={toggleShowA}>
-          <Toast.Header
-            style={{
-              background: 'rgba(77, 25, 25, 0.9)',
-              color: '#FFFFFF',
-            }}
-          >
-            <strong className="me-auto">НАМАСТЕ!</strong>
-          </Toast.Header>
-          <Toast.Body>
-            Благодарим вас за запись.
-            <br />
-            Встретимся на занятиях.
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <ModalAnswer show={showA} onHide={handleCloseA} />
     </Container>
   );
 }
