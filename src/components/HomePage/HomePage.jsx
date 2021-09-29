@@ -7,8 +7,10 @@ import Slider from '../Slider/Slider';
 import ModalClient from '../ModalClient/ModalClient';
 
 export default function HomePage() {
-  const setShow = useState(false);
+  const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
   return (
     <>
       <Slider />
@@ -240,7 +242,7 @@ export default function HomePage() {
           </Col>
         </Row>
       </Container>
-      <ModalClient />
+      <ModalClient show={show} onHide={handleClose} />
     </>
   );
 }
