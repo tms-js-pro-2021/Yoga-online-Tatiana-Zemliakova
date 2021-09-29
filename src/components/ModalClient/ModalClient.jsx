@@ -10,9 +10,9 @@ import {
 } from 'react-bootstrap';
 
 export default function ModalClient(props) {
-  const [showToast, setShowToast] = useState(true);
-  const toggleShowToast = () => setShowToast(!showToast);
-
+  const [showA, setShowA] = useState(false);
+  const toggleShowA = () => setShowA(!showA);
+  console.log(showA);
   return (
     <Container>
       <Modal {...props}>
@@ -44,7 +44,7 @@ export default function ModalClient(props) {
             </Form.Group>
             <FloatingLabel>
               <Button
-                onClick={toggleShowToast}
+                onClick={() => setShowA(true)}
                 variant="outline-dark"
                 type="submit"
                 style={{
@@ -58,26 +58,17 @@ export default function ModalClient(props) {
           </Form>
         </Modal.Body>
       </Modal>
-      <ToastContainer position="middle-center" style={{ height: '16rem' }}>
-        <Toast
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={5000}
-          autohide
-        >
+      <ToastContainer className="p-3" position="middle-center">
+        <Toast show={showA} onClose={toggleShowA}>
           <Toast.Header
             style={{
               background: 'rgba(77, 25, 25, 0.9)',
               color: '#FFFFFF',
             }}
           >
-            <strong>НАМАСТЕ!</strong>
+            <strong className="me-auto">НАМАСТЕ!</strong>
           </Toast.Header>
-          <Toast.Body
-            style={{
-              textAlign: 'center',
-            }}
-          >
+          <Toast.Body>
             Благодарим вас за запись.
             <br />
             Встретимся на занятиях.
