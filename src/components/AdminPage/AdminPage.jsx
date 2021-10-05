@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap';
 import { api } from '../../services/api';
 import ModalDelete from '../ModalDelete';
+import AddForm from '../AddForm';
 
 export default function AdminPage() {
   const [yogaEvents, setYogaEvents] = useState([]);
@@ -67,14 +68,7 @@ export default function AdminPage() {
               />
               <Button variant="secondary">Search</Button>
             </Form>
-            <Button
-              variant="secondary"
-              style={{
-                marginBottom: '2rem',
-              }}
-            >
-              Добавить
-            </Button>
+            <AddForm />
           </Card.Body>
         </Card>
       </Container>
