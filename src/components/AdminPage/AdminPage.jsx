@@ -1,5 +1,5 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Table,
   Container,
@@ -8,10 +8,30 @@ import {
   Form,
   FormControl,
 } from 'react-bootstrap';
-
-const tablines = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+import { api } from '../../services/api';
+import ModalDelete from '../ModalDelete';
+import AddForm from '../AddForm';
 
 export default function AdminPage() {
+  const [yogaEvents, setYogaEvents] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    try {
+      fetch(api.yogaEvents, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((data) => data.json())
+        .then((data) => setYogaEvents(data));
+    } catch (error) {
+      console.log('SERVER ERROR');
+    }
+  }, []);
   return (
     <>
       <Container
@@ -48,14 +68,7 @@ export default function AdminPage() {
               />
               <Button variant="secondary">Search</Button>
             </Form>
-            <Button
-              variant="secondary"
-              style={{
-                marginBottom: '2rem',
-              }}
-            >
-              Добавить
-            </Button>
+            <AddForm />
           </Card.Body>
         </Card>
       </Container>
@@ -71,27 +84,42 @@ export default function AdminPage() {
           <thead>
             <tr>
               <th>дата</th>
-              <th>время</th>
-              <th>преподаватель</th>
               <th>занятие</th>
+              <th>время начала</th>
+              <th>время окончания</th>
+              <th>преподаватель</th>
               <th>описание</th>
               <th>действие</th>
             </tr>
           </thead>
           <tbody>
-            {tablines.map((element) => (
-              <tr item key={element}>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
+            {yogaEvents.map((el) => (
+              <tr item key={el}>
+                <td>{el.id}</td>
+                <td>{el.title}</td>
+                <td>{el.startDateTime}</td>
+                <td>{el.endDateTime}</td>
+                <td>{el.description}</td>
+                <td>{el.description}</td>
+                <td>
+                  <Button
+                    variant="secondary"
+                    style={{
+                      marginRight: '1rem',
+                    }}
+                  >
+                    Изменить
+                  </Button>
+                  <Button variant="danger" onClick={handleShow}>
+                    Удалить
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
         </Table>
       </Container>
+      <ModalDelete show={show} onHide={handleClose} />
     </>
   );
 }
