@@ -17,18 +17,18 @@ export default function LoginPage() {
         method: 'POST',
         body: JSON.stringify(values),
         headers: {
-          Accept: 'application/json',
+          Authorization: 'Token',
           'Content-Type': 'application/json',
         },
-      }).then((res) => {
-        if (res.status === 200) {
-          res.json().then((data) => {
-            console.log(data);
-            push('/admin');
-          });
-          //сохранить токен, как todolist
-        } else res.text().then((errorString) => alert(errorString));
-      });
+      })
+        .then((res) => res.json())
+        .then(({ data: { token } = {} }) => {
+          window.sessionStorage.token = token;
+          push('/admin');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
       formik.resetForm();
     },
     validateOnChange: false,

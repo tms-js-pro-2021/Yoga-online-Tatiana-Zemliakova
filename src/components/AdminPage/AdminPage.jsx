@@ -14,6 +14,7 @@ import AddForm from '../AddForm';
 
 export default function AdminPage() {
   const [yogaEvents, setYogaEvents] = useState([]);
+  const [yogaTeachers, setYogaTeachers] = useState([]);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -26,12 +27,28 @@ export default function AdminPage() {
           'Content-Type': 'application/json',
         },
       })
-        .then((data) => data.json())
+        .then((res) => res.json())
         .then((data) => setYogaEvents(data));
     } catch (error) {
       console.log('SERVER ERROR');
     }
   }, []);
+
+  useEffect(() => {
+    try {
+      fetch(api.yogaTeahers, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setYogaTeachers(data));
+    } catch (error) {
+      console.log('SERVER ERROR');
+    }
+  }, []);
+
   return (
     <>
       <Container
@@ -83,33 +100,23 @@ export default function AdminPage() {
         <Table bordered hover responsive="sm">
           <thead>
             <tr>
-              <th>дата</th>
+              <th>преподаватель</th>
               <th>занятие</th>
               <th>время начала</th>
               <th>время окончания</th>
-              <th>преподаватель</th>
               <th>описание</th>
               <th>действие</th>
             </tr>
           </thead>
           <tbody>
             {yogaEvents.map((el) => (
-              <tr item key={el}>
-                <td>{el.id}</td>
+              <tr item key={el.id}>
+                <td>{el.teacher}</td>
                 <td>{el.title}</td>
                 <td>{el.startDateTime}</td>
                 <td>{el.endDateTime}</td>
                 <td>{el.description}</td>
-                <td>{el.description}</td>
                 <td>
-                  <Button
-                    variant="secondary"
-                    style={{
-                      marginRight: '1rem',
-                    }}
-                  >
-                    Изменить
-                  </Button>
                   <Button variant="danger" onClick={handleShow}>
                     Удалить
                   </Button>
