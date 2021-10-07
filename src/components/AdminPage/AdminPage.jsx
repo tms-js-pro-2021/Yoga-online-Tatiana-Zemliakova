@@ -8,7 +8,7 @@ import {
   Form,
   FormControl,
 } from 'react-bootstrap';
-import { api } from '../../services/api';
+import { api, fetchUtil } from '../../services/api';
 import ModalDelete from '../ModalDelete';
 import AddForm from '../AddForm';
 
@@ -21,12 +21,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     try {
-      fetch(api.yogaEvents, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      fetchUtil(api.yogaEvents, 'GET')
         .then((res) => res.json())
         .then((data) => setYogaEvents(data));
     } catch (error) {
@@ -36,18 +31,24 @@ export default function AdminPage() {
 
   useEffect(() => {
     try {
-      fetch(api.yogaTeahers, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      fetchUtil(api.yogaTeahers, 'GET')
         .then((res) => res.json())
         .then((data) => setYogaTeachers(data));
     } catch (error) {
       console.log('SERVER ERROR');
     }
   }, []);
+
+  const handleDelete = (id) => {
+    try {
+      fetchUtil(api.yogaEvents, 'DELETE').then(() => {
+        const yogaEventsDeleted = [...yogaEvents];
+        setYogaEvents(yogaEventsDeleted.filter((events) => id !== events.id));
+      });
+    } catch (error) {
+      console.log('SERVER ERROR');
+    }
+  };
 
   return (
     <>
@@ -109,24 +110,32 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody>
-            {yogaEvents.map((el) => (
-              <tr item key={el.id}>
-                <td>{el.teacher}</td>
-                <td>{el.title}</td>
-                <td>{el.startDateTime}</td>
-                <td>{el.endDateTime}</td>
-                <td>{el.description}</td>
-                <td>
-                  <Button variant="danger" onClick={handleShow}>
-                    Удалить
-                  </Button>
-                </td>
-              </tr>
-            ))}
+            {yogaEvents.map((el) => {
+              const convertTeacherIdToName = () => {
+                const [teacher] = yogaTeachers.filter(
+                  (teacher) => teacher.id === el.teacher
+                );
+                return teacher?.name;
+              };
+              return (
+                <tr item key={el.id}>
+                  <td>{convertTeacherIdToName()}</td>
+                  <td>{el.title}</td>
+                  <td>{el.startDateTime}</td>
+                  <td>{el.endDateTime}</td>
+                  <td>{el.description}</td>
+                  <td>
+                    <Button variant="danger" onClick={handleShow}>
+                      Удалить
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </Container>
-      <ModalDelete show={show} onHide={handleClose} />
+      <ModalDelete show={show} onHide={handleClose} onClick={handleDelete} />
     </>
   );
 }

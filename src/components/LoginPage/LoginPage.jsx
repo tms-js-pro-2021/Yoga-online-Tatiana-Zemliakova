@@ -22,8 +22,9 @@ export default function LoginPage() {
         },
       })
         .then((res) => res.json())
-        .then(({ data: { token } = {} }) => {
-          window.sessionStorage.token = token;
+        .then(({ token }) => {
+          console.log(token);
+          sessionStorage.setItem('auth-token', token);
           push('/admin');
         })
         .catch((err) => {

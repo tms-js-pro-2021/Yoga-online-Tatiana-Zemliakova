@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-export default function ModalDelete(props) {
+export default function ModalDelete({ handleDelete, ...props }) {
   return (
     <Modal {...props}>
       <Modal.Header closeButton>
@@ -16,6 +16,7 @@ export default function ModalDelete(props) {
       </Modal.Header>
       <Modal.Body>
         <Button
+          onClick={handleDelete}
           variant="outline-dark"
           type="submit"
           style={{
