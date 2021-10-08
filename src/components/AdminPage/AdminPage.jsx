@@ -38,7 +38,7 @@ export default function AdminPage() {
     }
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDeleteEvent = (id) => {
     try {
       fetchUtil(api.yogaEvents, 'DELETE').then(() => {
         const newYogaEvents = [...yogaEvents];
@@ -50,7 +50,7 @@ export default function AdminPage() {
     }
   };
 
-  const handleAdd = ({
+  const handleAddEvent = ({
     id,
     teacher,
     title,
@@ -158,18 +158,19 @@ export default function AdminPage() {
                       Изменить
                     </Button>
                   </td>
+                  <ModalAdmin
+                    show={show}
+                    onHide={handleClose}
+                    handleDeleteEvent={handleDeleteEvent}
+                    handleAddEvent={handleAddEvent}
+                    el={el}
+                  />
                 </tr>
               );
             })}
           </tbody>
         </Table>
       </Container>
-      <ModalAdmin
-        show={show}
-        onHide={handleClose}
-        handleDelete={handleDelete}
-        handleAdd={handleAdd}
-      />
     </>
   );
 }

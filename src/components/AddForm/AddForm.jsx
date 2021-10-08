@@ -1,26 +1,23 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField, Button } from '@material-ui/core';
-import { api } from '../../services/api';
+import { api, fetchUtil } from '../../services/api';
 
-export default function AddForm({ handleDelete }) {
+// const [yogaEvents, setYogaEvents] = useState([]);
+// const [yogaTeachers, setYogaTeachers] = useState([]);
+
+export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
   const formik = useFormik({
     initialValues: {
-      id: '',
-      title: '',
-      startDateTime: '',
-      endDateTime: '',
-      description: '',
+      id: el.id,
+      teacher: el.teacher,
+      title: el.title,
+      startDateTime: el.startDateTime,
+      endDateTime: el.endDateTime,
+      description: el.description,
     },
     onSubmit: (values) => {
-      fetch(api.yogaEvents, {
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => {
+      fetchUtil(api.yogaEvents, 'POST', JSON.stringify(values)).then((res) => {
         if (res.status === 200) {
           res.json().then((data) => {
             console.log(data);
@@ -42,9 +39,10 @@ export default function AddForm({ handleDelete }) {
             label="teacher"
             variant="outlined"
             required
-            value={formik.values.id}
+            value={formik.values.teacher}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            name="name"
             style={{
               marginBottom: '1rem',
             }}
@@ -54,9 +52,10 @@ export default function AddForm({ handleDelete }) {
             label="title"
             variant="outlined"
             required
-            value={formik.values.id}
+            value={formik.values.title}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            name="name"
             style={{
               marginBottom: '1rem',
             }}
@@ -66,7 +65,7 @@ export default function AddForm({ handleDelete }) {
             label="start time"
             variant="outlined"
             required
-            value={formik.values.id}
+            value={formik.values.startDateTime}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             style={{
@@ -78,7 +77,7 @@ export default function AddForm({ handleDelete }) {
             label="end time"
             variant="outlined"
             required
-            value={formik.values.id}
+            value={formik.values.endDateTime}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             style={{
@@ -90,7 +89,7 @@ export default function AddForm({ handleDelete }) {
             label="description"
             variant="outlined"
             required
-            value={formik.values.id}
+            value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             style={{
@@ -98,6 +97,7 @@ export default function AddForm({ handleDelete }) {
             }}
           />
           <Button
+            onClick={handleAddEvent}
             variant="contained"
             type="submit"
             style={{
@@ -107,13 +107,12 @@ export default function AddForm({ handleDelete }) {
             добавить занятие в расписание
           </Button>
           <Button
-            onClick={handleDelete}
-            variant="outline-dark"
+            onClick={handleDeleteEvent}
+            variant="contained"
             type="submit"
+            color="error"
             style={{
               marginBottom: '1rem',
-              background: '#4D1919',
-              color: '#FFFFFF',
             }}
           >
             удалить это занятие
