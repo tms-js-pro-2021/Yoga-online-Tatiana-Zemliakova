@@ -13,7 +13,7 @@ export const fetchUtil = (apiUrl, method, body = {}) => {
   };
 
   if (method === 'POST') {
-    options.body = body;
+    options.body === body;
   }
   return fetch(apiUrl, options);
 };

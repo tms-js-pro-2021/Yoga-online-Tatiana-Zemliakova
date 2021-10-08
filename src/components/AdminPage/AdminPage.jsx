@@ -9,8 +9,7 @@ import {
   FormControl,
 } from 'react-bootstrap';
 import { api, fetchUtil } from '../../services/api';
-import ModalDelete from '../ModalDelete';
-import AddForm from '../AddForm';
+import ModalAdmin from '../ModalAdmin';
 
 export default function AdminPage() {
   const [yogaEvents, setYogaEvents] = useState([]);
@@ -42,9 +41,37 @@ export default function AdminPage() {
   const handleDelete = (id) => {
     try {
       fetchUtil(api.yogaEvents, 'DELETE').then(() => {
-        const yogaEventsDeleted = [...yogaEvents];
-        setYogaEvents(yogaEventsDeleted.filter((events) => id !== events.id));
+        const newYogaEvents = [...yogaEvents];
+        setYogaEvents(newYogaEvents.filter((el) => id !== el.id));
+        console.log(id);
       });
+    } catch (error) {
+      console.log('SERVER ERROR');
+    }
+  };
+
+  const handleAdd = ({
+    id,
+    teacher,
+    title,
+    startDateTime,
+    endDateTime,
+    description,
+  }) => {
+    const newEvent = {
+      id,
+      teacher,
+      title,
+      startDateTime,
+      endDateTime,
+      description,
+    };
+    try {
+      fetchUtil(api.yogaEvents, 'POST', JSON.stringify(newEvent))
+        .then((res) => res.json())
+        .then((res) => {
+          setYogaEvents([yogaEvents, { ...newEvent, ...res }]);
+        });
     } catch (error) {
       console.log('SERVER ERROR');
     }
@@ -86,7 +113,9 @@ export default function AdminPage() {
               />
               <Button variant="secondary">Search</Button>
             </Form>
-            <AddForm />
+            <Button variant="secondary" onClick={handleShow}>
+              добавить занятие в расписание
+            </Button>
           </Card.Body>
         </Card>
       </Container>
@@ -125,8 +154,8 @@ export default function AdminPage() {
                   <td>{el.endDateTime}</td>
                   <td>{el.description}</td>
                   <td>
-                    <Button variant="danger" onClick={handleShow}>
-                      Удалить
+                    <Button variant="secondary" onClick={handleShow}>
+                      Изменить
                     </Button>
                   </td>
                 </tr>
@@ -135,7 +164,12 @@ export default function AdminPage() {
           </tbody>
         </Table>
       </Container>
-      <ModalDelete show={show} onHide={handleClose} onClick={handleDelete} />
+      <ModalAdmin
+        show={show}
+        onHide={handleClose}
+        handleDelete={handleDelete}
+        handleAdd={handleAdd}
+      />
     </>
   );
 }
