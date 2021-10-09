@@ -1,15 +1,50 @@
 /* eslint-disable no-undef */
 /* eslint-disable import/no-unresolved */
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { api, fetchUtil } from '../../services/api';
 import './HomePage.css';
 import Slider from '../Slider/Slider';
 import ModalClient from '../ModalClient/ModalClient';
+import CardEvents from '../CardEvents/CardEvents';
 
 export default function HomePage() {
+  const [yogaEvents, setYogaEvents] = useState([]);
+  const [singleEvent, setSingleEvent] = useState({
+    id: '',
+    teacher: '',
+    title: '',
+    startDateTime: '',
+    endDateTime: '',
+    description: '',
+  });
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const toTimeStamp = (eventTime) => new Date(eventTime).getTime();
+  useEffect(() => {
+    try {
+      fetchUtil(api.yogaEvents, 'GET')
+        .then((res) => res.json())
+        .then((data) => {
+          const sortedEvents = data.sort((a, b) =>
+            toTimeStamp(a.startDateTime) > toTimeStamp(b.startDateTime) ? 1 : -1
+          );
+          console.log(sortedEvents);
+          const [firstEvent] = sortedEvents;
+          setYogaEvents(sortedEvents);
+          setSingleEvent(firstEvent);
+        });
+    } catch (error) {
+      console.log('SERVER ERROR');
+    }
+  }, []);
+
+  const onEventClick = ({ target: { dataset } }) => {
+    const [clickedElement] = yogaEvents.filter((el) => el.id === dataset.id);
+    setSingleEvent(clickedElement);
+    console.log(clickedElement);
+  };
 
   return (
     <>
@@ -124,60 +159,12 @@ export default function HomePage() {
           backgroundRepeat: 'no-repeat',
         }}
       >
-        <Row>
-          <Col md={6}>
-            <Card
-              style={{
-                marginBottom: '2rem',
-                paddingTop: '4.5rem',
-                paddingBottom: '5rem',
-                paddingLeft: '2rem',
-                paddingRight: '1rem',
-                height: '24rem',
-                background: 'rgba(229, 229, 229, 0.9)',
-                color: '#4D1919',
-              }}
-            >
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the cards content.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={6}>
-            <Card
-              style={{
-                paddingTop: '4.5rem',
-                paddingBottom: '5rem',
-                paddingLeft: '2rem',
-                paddingRight: '1rem',
-                height: '24rem',
-                background: 'rgba(77, 25, 25, 0.9)',
-                color: '#FFFFFF',
-              }}
-            >
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Card Subtitle
-                </Card.Subtitle>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the cards content.
-                </Card.Text>
-                <Button variant="outline-light" onClick={handleShow}>
-                  Записаться
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        <CardEvents
+          yogaEvents={yogaEvents}
+          singleEvent={singleEvent}
+          onEventClick={onEventClick}
+          handleShow={handleShow}
+        />
       </Container>
       <Container
         fluid

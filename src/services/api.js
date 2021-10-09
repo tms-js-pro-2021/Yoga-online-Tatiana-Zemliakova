@@ -4,16 +4,19 @@ export const api = {
 };
 
 export const fetchUtil = (apiUrl, method, body = {}) => {
-  const options = {
+  let options = {
     method,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: sessionStorage.getItem('auth-token'),
+      Authorization: `Token ${sessionStorage.getItem('auth-token')}`,
     },
   };
 
   if (method === 'POST') {
-    options.body === body;
+    body.startDateTime = new Date(body.startDateTime).getTime()
+    body.endDateTime = new Date(body.endDateTime).getTime()
+    options.body = JSON.stringify(body);
+    console.log(body)
   }
   return fetch(apiUrl, options);
 };

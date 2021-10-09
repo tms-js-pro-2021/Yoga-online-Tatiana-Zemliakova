@@ -17,17 +17,12 @@ export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
       description: el.description,
     },
     onSubmit: (values) => {
-      fetchUtil(api.yogaEvents, 'POST', JSON.stringify(values)).then((res) => {
-        if (res.status === 200) {
-          res.json().then((data) => {
-            console.log(data);
-          });
-        } else res.text().then((errorString) => alert(errorString));
-      });
-      formik.resetForm();
+      console.log(values);
+      fetchUtil(api.yogaEvents, 'POST', values)
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     },
     validateOnChange: false,
-    validateOnBlur: true,
   });
 
   return (
@@ -42,7 +37,7 @@ export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
             value={formik.values.teacher}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            name="name"
+            name="teacher"
             style={{
               marginBottom: '1rem',
             }}
@@ -55,15 +50,16 @@ export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
             value={formik.values.title}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            name="name"
+            name="title"
             style={{
               marginBottom: '1rem',
             }}
           />
           <TextField
             id="outlined-basic"
-            label="start time"
+            label="Время начала"
             variant="outlined"
+            name="startDateTime"
             required
             value={formik.values.startDateTime}
             onChange={formik.handleChange}
@@ -74,8 +70,9 @@ export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
           />
           <TextField
             id="outlined-basic"
-            label="end time"
+            label="Время окончания"
             variant="outlined"
+            name="endDateTime"
             required
             value={formik.values.endDateTime}
             onChange={formik.handleChange}
@@ -86,9 +83,10 @@ export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
           />
           <TextField
             id="outlined-basic"
-            label="description"
+            label="Описание"
             variant="outlined"
             required
+            name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
