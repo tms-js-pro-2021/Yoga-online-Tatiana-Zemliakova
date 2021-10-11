@@ -1,37 +1,28 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { TextField, Button } from '@material-ui/core';
-import { api } from '../../services/api';
+import { api, fetchUtil } from '../../services/api';
 
-export default function AddForm() {
+// const [yogaEvents, setYogaEvents] = useState([]);
+// const [yogaTeachers, setYogaTeachers] = useState([]);
+
+export default function AddForm({ handleDeleteEvent, handleAddEvent, el }) {
   const formik = useFormik({
     initialValues: {
-      id: '',
-      title: '',
-      description: '',
-      startDateTime: '',
-      endDateTime: '',
-      customFields: '',
+      id: el.id,
+      teacher: el.teacher,
+      title: el.title,
+      startDateTime: el.startDateTime,
+      endDateTime: el.endDateTime,
+      description: el.description,
     },
     onSubmit: (values) => {
-      fetch(api.yogaEvents, {
-        method: 'POST',
-        body: JSON.stringify(values),
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          res.json().then((data) => {
-            console.log(data);
-          });
-        } else res.text().then((errorString) => alert(errorString));
-      });
-      formik.resetForm();
+      console.log(values);
+      fetchUtil(api.yogaEvents, 'POST', values)
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     },
     validateOnChange: false,
-    validateOnBlur: true,
   });
 
   return (
@@ -39,51 +30,90 @@ export default function AddForm() {
       <form onSubmit={formik.handleSubmit}>
         <div style={{ width: 400, display: 'flex', flexDirection: 'column' }}>
           <TextField
+            id="outlined-basic"
+            label="teacher"
+            variant="outlined"
             required
-            label="id"
-            name="id"
-            value={formik.values.id}
+            value={formik.values.teacher}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.id && !!formik.errors.id}
-            helperText={formik.touched.id && formik.errors.id}
+            name="teacher"
+            style={{
+              marginBottom: '1rem',
+            }}
           />
           <TextField
+            id="outlined-basic"
+            label="title"
+            variant="outlined"
             required
-            label="Заниятие"
-            type="title"
+            value={formik.values.title}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             name="title"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.id && !!formik.errors.id}
-            helperText={formik.touched.id && formik.errors.id}
+            style={{
+              marginBottom: '1rem',
+            }}
           />
           <TextField
+            id="outlined-basic"
+            label="Время начала"
+            variant="outlined"
+            name="startDateTime"
             required
-            label="id"
-            name="id"
-            value={formik.values.id}
+            value={formik.values.startDateTime}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.id && !!formik.errors.id}
-            helperText={formik.touched.id && formik.errors.id}
+            style={{
+              marginBottom: '1rem',
+            }}
           />
           <TextField
+            id="outlined-basic"
+            label="Время окончания"
+            variant="outlined"
+            name="endDateTime"
             required
-            label="id"
-            name="id"
-            value={formik.values.id}
+            value={formik.values.endDateTime}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            sx={{ m: 1 }}
-            error={formik.touched.id && !!formik.errors.id}
-            helperText={formik.touched.id && formik.errors.id}
+            style={{
+              marginBottom: '1rem',
+            }}
           />
-          <Button variant="contained" type="submit" sx={{ m: 1 }}>
+          <TextField
+            id="outlined-basic"
+            label="Описание"
+            variant="outlined"
+            required
+            name="description"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            style={{
+              marginBottom: '1rem',
+            }}
+          />
+          <Button
+            onClick={handleAddEvent}
+            variant="contained"
+            type="submit"
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
             добавить занятие в расписание
+          </Button>
+          <Button
+            onClick={handleDeleteEvent}
+            variant="contained"
+            type="submit"
+            color="error"
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
+            удалить это занятие
           </Button>
         </div>
       </form>
