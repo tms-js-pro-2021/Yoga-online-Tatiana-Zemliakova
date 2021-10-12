@@ -13,6 +13,7 @@ export default function CardEvents({
     <Row>
       <Col md={6}>
         <Card
+          className="text-center"
           style={{
             marginBottom: '2rem',
             paddingTop: '4.5rem',
@@ -26,21 +27,38 @@ export default function CardEvents({
         >
           <Card.Body
             style={{
-              overflowY: 'scroll',
+              overflowY: 'auto',
             }}
           >
             {yogaEvents.map((el) => (
-              <div item key={el.id} data-id={el.id} onClick={onEventClick}>
-                {convertDateTime(el.startDateTime)}
-                <br />
-                {el.title}
-              </div>
+              <>
+                <Card.Title
+                  style={{
+                    cursor: 'pointer',
+                  }}
+                  item
+                  key={el.id}
+                  data-id={el.id}
+                  onClick={onEventClick}
+                >
+                  {el.title}
+                </Card.Title>
+                <Card.Text
+                  style={{ marginBottom: '1.5rem' }}
+                  item
+                  key={el.id}
+                  data-id={el.id}
+                >
+                  {convertDateTime(el.startDateTime)}
+                </Card.Text>
+              </>
             ))}
           </Card.Body>
         </Card>
       </Col>
       <Col md={6}>
         <Card
+          className="text-center"
           style={{
             paddingTop: '4.5rem',
             paddingBottom: '5rem',
@@ -53,10 +71,15 @@ export default function CardEvents({
         >
           <Card.Body
             style={{
-              overflowY: 'scroll',
+              overflowY: 'auto',
             }}
           >
-            <div>{singleEvent.title}</div>
+            <Card.Title style={{ marginBottom: '2rem' }}>
+              {singleEvent.title}
+            </Card.Title>
+            <Card.Text style={{ marginBottom: '2rem' }}>
+              {singleEvent.description}
+            </Card.Text>
             <Button variant="outline-light" onClick={handleShow}>
               Записаться
             </Button>
